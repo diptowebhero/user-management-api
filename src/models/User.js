@@ -12,9 +12,22 @@ const userSchema = new Schema({
         required: true,
         trim: true
     },
+    username: {
+        type: String,
+        required: true,
+        trim: true
+    },
     email: {
         type: String,
         required: true,
+        unique:true,
+        validate: {
+            validator: function (value) {
+                // Regular expression for email validation
+                return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+            },
+            message: 'Invalid email address'
+        },
         trim: true
     },
 
@@ -25,7 +38,7 @@ const userSchema = new Schema({
     },
     isVerified: {
         type: String,
-        enum : ['verified','unverified'],
+        enum: ['verified', 'unverified'],
         default: "unverified"
     },
 });

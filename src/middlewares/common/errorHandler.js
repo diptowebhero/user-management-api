@@ -1,6 +1,6 @@
 const errorHandler = (err, req, res, next) => {
     try {
-        if (res.headersSent()) {
+        if (res.headersSent) {
             return next(err)
         } else {
             const status = err.status || 500;
