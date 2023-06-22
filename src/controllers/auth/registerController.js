@@ -2,7 +2,7 @@ const {hashPassword} = require("./../../utility/hashPassword")
 const createHttpError = require('http-errors');
 const User = require("./../../models/User")
 const sendMail = require("./../../utility/sendMail")
-const loginController = async (req, res, next) => {
+const registerController = async (req, res, next) => {
     try {
         const {firstName, lastName, username, email, password} = req.body
 
@@ -50,4 +50,4 @@ const loginController = async (req, res, next) => {
         next(err)
     }
 }
-module.exports = loginController
+module.exports = registerController
