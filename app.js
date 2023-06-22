@@ -5,6 +5,8 @@ const app = express();
 
 // external imports
 const connectDB=require("./db/connectDB")
+const notFoundHandler=require("./src/middlewares/common/notFoundHandler")
+const errorHandler=require("./src/middlewares/common/errorHandler")
 
 // security middlewares dependencies
 const helmet = require('helmet');
@@ -46,6 +48,12 @@ readdirSync("./src/routes/auth").map(r=>app.use("/api/v1",require(`./src/routes/
 app.get('/', async (req, res) => {
     res.send("Hello World");
 });
+
+//not found handler
+app.use(notFoundHandler)
+
+//default error handler
+app.use(errorHandler)
 
 //connect database
 connectDB()
